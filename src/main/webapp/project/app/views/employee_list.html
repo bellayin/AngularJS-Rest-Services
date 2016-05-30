@@ -1,0 +1,281 @@
+<div class="alert alert-success" id="alert-success">
+    <strong>Success!</strong> Your data successfully saved.
+</div>
+<div class="alert alert-danger" id="alert-warning">
+    <strong>Error!</strong> Failed to save data.
+</div>
+<div data-ng-controller="EmployeeListController">
+    <div>
+        <h3>{{name}}</h3>
+    </div>
+
+    <!-- Binds the grid component to be displayed. -->
+    <div class="gridStyle" ui-grid-selection ui-grid="gridOptions"></div>
+
+
+    <!--Verify employee, if there is no id present, that we are Adding a employee -->
+    <div ng-if="editId == null">
+        <h3>Add employee</h3>
+
+        <div>
+            <div class="form" data-ng-controller="EmployeeListController">
+                <!-- Specify the function to be called on submit and disable HTML5 validation, since we're using Angular validation-->
+                <form name="employeeForm" ng-submit="createEmployee()" novalidate>
+
+
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeForm.name.$invalid && employeeForm.name.$dirty}">
+                        <label for="name">Name:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeForm.name.$valid && employeeForm.name.$dirty}"></span>
+
+                        <input id="name" name="name" type="text" class="form-control" maxlength="50"
+                               ng-model="employee.name"
+                               required ng-minlength="2" ng-maxlength="50"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeForm.name.$error.required">Add Name.</p>
+
+                        <p class="help-block" ng-show="employeeForm.name.$error.minlength">Name must be at least 2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeForm.name.$error.maxlength">Name cannot be longer than 50
+                            characters.</p>
+                    </div>
+
+
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeForm.lastName.$invalid && employeeForm.lastName.$dirty}">
+                        <label for="lastName">Last Name:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeForm.lastName.$valid && employeeForm.lastName.$dirty}"></span>
+
+                        <input id="lastName" name="lastName" type="text" class="form-control" maxlength="100"
+                               ng-model="employee.lastName"
+                               required ng-minlength="2" ng-maxlength="100"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeForm.lastName.$error.required">Add Last Name.</p>
+
+                        <p class="help-block" ng-show="employeeForm.lastName.$error.minlength">Last Name must be at
+                            least 2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeForm.lastName.$error.maxlength">Last Name cannot be
+                            longer
+                            than 50 characters.</p>
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeForm.age.$invalid && employeeForm.age.$dirty}">
+                        <label for="age">Age:
+                            <input type="number" id="age" name="age" ng-model="employee.age"
+                                   min="0" max="99" required>
+                        </label>
+
+                        <p class="help-block" ng-show="employeeForm.age.$error.required">
+                            Add age</p>
+
+                        <p class="help-block" ng-show="employeeForm.age.$error.number">
+                            Not valid number!</p>
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeForm.age.$valid && employeeForm.age.$dirty}"></span>
+                    </div>
+
+
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeForm.address.$invalid && employeeForm.address.$dirty}">
+                        <label for="lastName">Address:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeForm.address.$valid && employeeForm.address.$dirty}"></span>
+
+                        <input id="address" name="address" type="text" class="form-control" maxlength="100"
+                               ng-model="employee.address"
+                               required ng-minlength="2" ng-maxlength="100"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeForm.address.$error.required">Add address.</p>
+
+                        <p class="help-block" ng-show="employeeForm.address.$error.minlength">Address must be at least 2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeForm.address.$error.maxlength">Address cannot be longer
+                            than 50 characters.</p>
+                    </div>
+
+
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeForm.position.$invalid && employeeForm.position.$dirty}">
+                        <label for="position">Employee Position:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeForm.position.$valid && employeeForm.position.$dirty}"></span>
+
+                        <input id="position" name="position" type="text" class="form-control" maxlength="100"
+                               ng-model="employee.position"
+                               required ng-minlength="2" ng-maxlength="100"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeForm.position.$error.required">Employee position.</p>
+
+                        <p class="help-block" ng-show="employeeForm.position.$error.minlength">Employee position must be
+                            at
+                            least 2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeForm.position.$error.maxlength">Employee position cannot
+                            be
+                            longer
+                            than 50 characters.</p>
+                    </div>
+
+                    <!-- Form buttons. The 'Save' button is only enabled when the form is valid. -->
+                    <div class="buttons">
+                        <button type="button" class="btn btn-primary" ng-click="clearForm()">Clear</button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="employeeForm.$invalid">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Otherwise it's an Edit -->
+    <div ng-if="editId != null">
+        <h3>Edit employee</h3>
+
+        <div>
+            <div class="form" data-ng-controller="EmployeeListController" ng-repeat="edit in editData">
+                <!-- Specify the function to be called on submit and disable HTML5 validation, since we're using Angular validation-->
+                <form name="employeeFormEdit" ng-submit="updateEmployee()" novalidate>
+                    <input type="text" ng-model="edit.id" style="display: none">
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeFormEdit.editName.$invalid && employeeFormEdit.editName.$dirty}">
+                        <label for="editName">Name:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeFormEdit.editName.$valid && employeeFormEdit.editName.$dirty}"></span>
+
+                        <input id="editName" name="name" type="text" class="form-control" maxlength="50"
+                               ng-model="edit.name"
+                               required ng-minlength="2" ng-maxlength="50"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeFormEdit.editName.$error.required">Add Name.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editName.$error.minlength">Name must be at least
+                            2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editName.$error.maxlength">Name cannot be longer
+                            than 50
+                            characters.</p>
+                    </div>
+
+
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeFormEdit.editLastName.$invalid && employeeFormEdit.lastName.$dirty}">
+                        <label for="editLastName">Last Name:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeFormEdit.editLastName.$valid && employeeFormEdit.lastName.$dirty}"></span>
+
+                        <input id="editLastName" name="editLastName" type="text" class="form-control" maxlength="100"
+                               ng-model="edit.lastName"
+                               required ng-minlength="2" ng-maxlength="100"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeFormEdit.editLastName.$error.required">Add Last Name.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editLastName.$error.minlength">Last Name must be
+                            at least 2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editLastName.$error.maxlength">Last Name cannot
+                            be longer
+                            than 50 characters.</p>
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeFormEdit.editAge.$invalid && employeeFormEdit.editAge.$dirty}">
+                        <label for="editAge">Age:
+                            <input type="number" id="editAge" name="age" ng-model="edit.age"
+                                   min="0" max="99" required>
+                        </label>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editAge.$error.required">
+                            Add age</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editAge.$error.number">
+                            Not valid number!</p>
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeFormEdit.editAge.$valid && employeeFormEdit.editAge.$dirty}"></span>
+                    </div>
+
+
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeFormEdit.address.$invalid && employeeFormEdit.address.$dirty}">
+                        <label for="editAddress">Address:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeFormEdit.address.$valid && employeeFormEdit.address.$dirty}"></span>
+
+                        <input id="editAddress" name="address" type="text" class="form-control" maxlength="100"
+                               ng-model="edit.address"
+                               required ng-minlength="2" ng-maxlength="100"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeFormEdit.editAddress.$error.required">Add address.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editAddress.$error.minlength">Address must be at
+                            least 2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editAddress.$error.maxlength">Address cannot be
+                            longer
+                            than 50 characters.</p>
+                    </div>
+
+
+                    <!-- Display an error if the input is invalid and is dirty (only when someone changes the value) -->
+                    <div class="form-group"
+                         ng-class="{'has-error' : employeeFormEdit.editPosition.$invalid && employeeFormEdit.editPosition.$dirty}">
+                        <label for="editPosition">Employee Position:</label>
+                        <!-- Display a check when the field is valid and was modified -->
+                        <span ng-class="{'glyphicon glyphicon-ok' : employeeFormEdit.position.$valid && employeeFormEdit.position.$dirty}"></span>
+
+                        <input id="editPosition" name="position" type="text" class="form-control" maxlength="100"
+                               ng-model="edit.position"
+                               required ng-minlength="2" ng-maxlength="100"/>
+
+                        <!-- Validation messages to be displayed on required, minlength and maxlength -->
+                        <p class="help-block" ng-show="employeeFormEdit.editPosition.$error.required">Employee
+                            position.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.editPosition.$error.minlength">Employee position
+                            must be at
+                            least 2
+                            characters long.</p>
+
+                        <p class="help-block" ng-show="employeeFormEdit.position.$error.maxlength">Employee position
+                            cannot be
+                            longer
+                            than 50 characters.</p>
+                    </div>
+
+                    <!-- Form buttons. The 'Save' button is only enabled when the form is valid. -->
+                    <div class="buttons">
+                        <button type="button" class="btn btn-primary" ng-click="clearForm()">Clear</button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="employeeFormEdit.$invalid">Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

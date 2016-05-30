@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="company">
+<head>
+    <meta charset="utf-8">
+    <title>AngularJS &middot; REST service &middot; DropWizard &middot; MongoDB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Angular+REST service+Dropwizard+MongoDB">
+    <meta name="author" content="Bella Galoyan">
+
+
+  <!--Bootstrap, AngularJs Stylesheets-->
+    <link href="project/assets/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="project/assets/bower_components/angular-ui-grid/ui-grid.min.css"/>
+    <link rel="stylesheet" href="project/assets/bower_components/angular-ui-grid/ng-grid.min.css" />
+
+
+    <!-- Application Stylesheet -->
+    <link href="project/assets/css/style.css" type="text/css" rel="stylesheet">
+    <!-- endbuild -->
+
+   <!--Bower components-->
+    <script src="project/assets/bower_components/bower-angularjs/angular.js"></script>
+    <script src="project/assets/bower_components/jquery/dist/jquery.js"></script>
+    <script src="project/assets/bower_components/bower-angularjs/angular-route.js"></script>
+    <script src="project/assets/bower_components/bower-angularjs/angular-resource.js"></script>
+    <script src="project/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="project/assets/bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="project/assets/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+
+    <!-- Application Module and Route Provider -->
+    <script src="project/app/app.routes.js"></script>
+
+    <!--Controllers-->
+
+    <script src="project/app/controllers/employee.controller.js"></script>
+    <script src="project/app/controllers/alertmessage.controller.js"></script>
+
+    <!--Services-->
+    <script src="project/app/services/employee.service.js"></script>
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="project/assets/bower_components/html5shiv/dist/html5shiv.js"></script>
+    <![endif]-->
+
+
+</head>
+<body>
+
+<div class="container-narrow">
+
+    <!-- /container -->
+    <ng-view></ng-view>
+
+
+    <div class="footer">
+        <p>&copy; Bella Galoyan</p>
+    </div>
+</div>
+</body>
+</html>
