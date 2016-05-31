@@ -1,4 +1,4 @@
-# AngularJS-Rest-Services
+# AngularJS-Rest-Services-MongoDB
 
 Simple project allows to retrieve employees from MongoDB using AngularJS and REST Service
 
